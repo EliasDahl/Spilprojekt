@@ -1,22 +1,23 @@
-PVector location;
+
+
+class Bil{
+PVector locationbil;
 PVector velocity;
 PVector acceleration;
 float x,y;
-
-class Bil{
 Bil(){
-  location = new PVector(0,0);
+  locationbil = new PVector(0,0);
   velocity = new PVector(0,0);
-  x=100;
+  x=50;
   y=50;
 }
 void update(){
   PVector mouse = new PVector(mouseX,mouseY);
-  PVector dir = PVector.sub(mouse,location);
+  PVector dir = PVector.sub(mouse,locationbil);
   dir.mult(0.001);
   acceleration = dir;
   velocity.add(acceleration);
-  location.add(velocity);
+  locationbil.add(velocity);
   velocity.limit(5);
  /* if(keyPressed)
   {
@@ -36,7 +37,7 @@ void display(){
   fill(250);
   pushMatrix();
   rectMode(CENTER);
-  translate(location.x,location.y);
+  translate(locationbil.x,locationbil.y);
   rotate(angle);
   rect(0,0,x,y);
   popMatrix();

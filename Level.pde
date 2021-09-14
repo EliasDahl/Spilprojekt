@@ -14,7 +14,7 @@ Level(){
   two.locationx=600;
   two.locationy=200;
   two.sizex=400;
-  two.sizey=500;
+  two.sizey=300;
 }
 
 void update(){

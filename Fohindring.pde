@@ -5,7 +5,7 @@ class Forhindring
   
 Forhindring()
 {
-  x=30;
+  x=24;
 }
 
 void update()
