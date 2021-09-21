@@ -5,42 +5,54 @@ PVector locationbil;
 PVector velocity;
 PVector acceleration;
 float x,y;
+float heading=90;
+float damping = 0.995;
+float r = 16;
+boolean thrusting = false;
+PImage placeholder;
 Bil(){
-  locationbil = new PVector(0,0);
-  velocity = new PVector(0,0);
-  x=50;
+  locationbil = new PVector(25,25);
+  velocity = new PVector();
+  acceleration = new PVector();
+  x=25;
   y=50;
+  placeholder = loadImage("Finn.png");
 }
 void update(){
-  PVector mouse = new PVector(mouseX,mouseY);
-  PVector dir = PVector.sub(mouse,locationbil);
-  dir.mult(0.001);
-  acceleration = dir;
-  velocity.add(acceleration);
   locationbil.add(velocity);
-  velocity.limit(5);
- /* if(keyPressed)
-  {
-    if(key=='s')
-    {
-      }
-    } 
-    if(key=='a')
-    {
-    }*/
+  velocity.add(acceleration);
+  velocity.mult(damping);
+  velocity.limit(3);
+  acceleration.mult(0);
 
+}
+void applyForce(PVector force){
+  PVector f = force.get();
+  acceleration.add(f);
+}
+void turn(float a){
+  heading +=a;
+}
+void thrust(){
+  float angle = heading-PI/2;
+  PVector force = new PVector(cos(angle),sin(angle));
+  force.mult(0.1);
+  applyForce(force);
+  thrusting = true;
 }
 
 void display(){
-  float angle = velocity.heading();
+   if(one.hit==true||two.hit==true){strokeWeight(0);}
+   else{strokeWeight(5);}
   stroke(0);
-  fill(250);
   pushMatrix();
-  rectMode(CENTER);
   translate(locationbil.x,locationbil.y);
-  rotate(angle);
+  rotate(heading);
+  fill(255);
+  rectMode(CENTER);
   rect(0,0,x,y);
   popMatrix();
-}
   
+  thrusting = false;
+}
 }
