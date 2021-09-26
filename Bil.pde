@@ -9,14 +9,17 @@ float heading=90;
 float damping = 0.995;
 float r = 16;
 boolean thrusting = false;
-PImage placeholder;
+PImage bil;
+int startx,starty;
 Bil(){
-  locationbil = new PVector(25,25);
+  startx=25;
+  starty=25;
+  locationbil = new PVector(startx,starty);
   velocity = new PVector();
   acceleration = new PVector();
   x=25;
   y=50;
-  placeholder = loadImage("Finn.png");
+  bil = loadImage("Bil.png");
 }
 void update(){
   locationbil.add(velocity);
@@ -24,7 +27,6 @@ void update(){
   velocity.mult(damping);
   velocity.limit(3);
   acceleration.mult(0);
-
 }
 void applyForce(PVector force){
   PVector f = force.get();
@@ -42,15 +44,18 @@ void thrust(){
 }
 
 void display(){
-   if(one.hit==true||two.hit==true){strokeWeight(0);}
+   if(one.hit==true||two.hit==true||three.hit==true||four.hit==true||five.hit==true||six.hit==true||one.hitedge==true){strokeWeight(0);}
    else{strokeWeight(5);}
   stroke(0);
   pushMatrix();
   translate(locationbil.x,locationbil.y);
   rotate(heading);
   fill(255);
-  rectMode(CENTER);
-  rect(0,0,x,y);
+  imageMode(CENTER);
+  bil.resize(0,75);
+  if(one.hit==false&&two.hit==false&&three.hit==false&&four.hit==false&&five.hit==false&&six.hit==false&&slut.hit==false&&one.hitedge==false){
+  image(bil,0,0);}
+  //rect(0,0,x,y);
   popMatrix();
   
   thrusting = false;

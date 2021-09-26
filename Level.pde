@@ -1,34 +1,57 @@
 Forhindring one;
 Forhindring two;
-Coin a;
+Forhindringmover three;
+Forhindring four;
+Forhindring five;
+Forhindring six;
+Forhindring slut;
+Coin c;
+float lev;
 class Level{
+  float lev2;
 Level(){ 
   one = new Forhindring();
-  one.locationx=150;
-  one.locationy=200;
-  one.sizex=500;
-  one.sizey=400;
-  
   two = new Forhindring();
-  two.locationx=750;
-  two.locationy=200;
-  two.sizex=300;
-  two.sizey=300;
-  
-  a = new Coin();
-  a.x=500;
-  a.y=50;
+  three = new Forhindringmover();
+  four = new Forhindring();
+  five = new Forhindring();
+  six = new Forhindring();
+  slut = new Forhindring();
+  lev=0;
+  c = new Coin();
 }
 
 void update(){
+  lev2=lev;
+  if(keyPressed){
+    if(key=='0'){lev=0;}
+    if(key=='1'){lev=1;}
+    if(key=='2'){lev=2;}
+    if(key=='3'){lev=3;}
+  }
+ three.update();
  one.update();
  two.update();
- a.update();
+ four.update();
+ five.update();
+ six.update();
+ c.update();
+ slut.update();
+ if(slut.hit==true&&b.locationbil.x>0&&b.locationbil.y>0&&b.locationbil.x<width&&b.locationbil.y<height){
+ if(keyPressed==true){
+ lev=lev+1;
+ }
+ }
 }
 
 void display(){
+ three.display();
  one.display();
  two.display();
- a.display();
+ four.display();
+ five.display();
+ six.display();
+ c.display();
+ slut.display();
    }
 }
